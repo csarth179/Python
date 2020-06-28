@@ -1,11 +1,14 @@
-#!/usr/local/bin/python3                                                                                                                                    
-import sys
-import webbrowser
+#!/usr/local/bin/python3                                                                                                                               
+
 """
 Author: Sarthak Chopra
 File Name: leaps.py
 Date: Sun Jun 20 2020
 """
+
+import sys
+import webbrowser
+
 print("""Game Rules:
 1) Do not step out of bounds.
 2) Do not land on a number which equals zero.
@@ -39,7 +42,7 @@ def move_right():
         repeated_index.append(current_index)
         current_element = game_board[current_index]
         right_sum = 0
-
+        # shift by sum
         for right_sum in range(0, current_element):
                 right_sum += 1
         previous_index = right_sum
@@ -87,13 +90,14 @@ def move_left():
 
 def can_win():
         once = True
-
+        # check end conditions
         if(current_element <= 0 or current_index > end_position or current_index < 0):     
                 print('\nNo more actions possible! You lost!')
                 sys.exit(0)
         if(current_index == end_position):
                 print('\nLanded on the last number! You won!')
                 sys.exit(0)
+        # recursive call
         if(move_right() or move_left() or once == True):
                 can_win()
                 once = False
@@ -101,6 +105,7 @@ def can_win():
 if(current_element <= 0):
         print('You lost!')
         sys.exit(0)
+# print indices
 if(game_board):
         print('List of possible positions to land on:', current_index, end = ' ')
         can_win()
